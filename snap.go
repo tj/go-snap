@@ -2,7 +2,6 @@ package main
 
 import "github.com/mreiferson/go-snappystream"
 import "bufio"
-import "fmt"
 import "os"
 import "io"
 

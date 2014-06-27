@@ -10,7 +10,7 @@ func main() {
 	out := bufio.NewWriter(os.Stdout)
 	snap := snappystream.NewWriter(out)
 
-	n, err := io.Copy(snap, in)
+	_, err := io.Copy(snap, in)
 	if err != nil {
 		panic(err)
 	}

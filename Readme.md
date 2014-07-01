@@ -1,7 +1,7 @@
 
 # go-snap
 
- Tiny snappy command-line utility operating over stdio to test compression rates.
+ Tiny snappy command-line utility operating over stdio to test compression rates. Supports encoding and decoding of snappy streams.
 
 ## Installation
 

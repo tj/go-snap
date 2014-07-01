@@ -1,19 +1,39 @@
 package main
 
-import "github.com/mreiferson/go-snappystream"
-import "bufio"
+import snap "github.com/mreiferson/go-snappystream"
+import "github.com/visionmedia/go-flags"
 import "os"
 import "io"
 
-func main() {
-	in := bufio.NewReader(os.Stdin)
-	out := bufio.NewWriter(os.Stdout)
-	snap := snappystream.NewWriter(out)
+type Options struct {
+	Encode bool `short:"e" long:"encode" description:"encode stdin (the default)"`
+	Decode bool `short:"d" long:"decode" description:"decode stdin"`
+}
 
-	_, err := io.Copy(snap, in)
+func check(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
 
-	out.Flush()
+func main() {
+	opts := &Options{}
+	_, err := flags.Parse(opts)
+	check(err)
+
+	if opts.Decode {
+		decode()
+	} else {
+		encode()
+	}
+}
+
+func encode() {
+	_, err := io.Copy(snap.NewWriter(os.Stdout), os.Stdin)
+	check(err)
+}
+
+func decode() {
+	_, err := io.Copy(os.Stdout, snap.NewReader(os.Stdin, snap.VerifyChecksum))
+	check(err)
 }

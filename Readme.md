@@ -12,7 +12,22 @@ $ go get github.com/visionmedia/go-snap
 ## Usage
 
 ```
-$ go-snap < in > out
+
+  Usage: snap [options]
+
+  Options:
+    -e, --encode  encode stdin (the default)
+    -d, --decode  decode stdin
+
+  Help Options:
+    -h, --help    Show this help message
+
+```
+
+## Examples
+
+```
+$ go-snap < some.txt | go-snap --decode
 ```
 
 # License
